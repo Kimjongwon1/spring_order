@@ -1,4 +1,4 @@
-package com.encore.order.item.Domain;
+package com.encore.order.ordering.Domain;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -17,23 +17,32 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false)
     private String name;
-
     @Column(nullable = false)
     private int price;
-
     @Column(nullable = false)
     private int stockQuantity;
-
     private String imagePath;
-
     @CreationTimestamp
     private LocalDateTime createdTime;
 
     @UpdateTimestamp
     private LocalDateTime updatedTime;
 
+    public void setPrice(int price) {
+        if (price <= 0) {
+            throw new IllegalArgumentException("1개 이상 입력하시오");
+        }
+        this.price = price;
+    }
+
+    public void setstock(int stockQuantity) {
+        if (stockQuantity <= 0) {
+            throw new IllegalArgumentException("1개 이상 입력하시오");
+        }
+        this.stockQuantity = stockQuantity;
+    }
     @Builder
     public Item(Long id, String name, int price, int stockQuantity, String imagePath) {
         this.id = id;
@@ -42,6 +51,4 @@ public class Item {
         this.stockQuantity = stockQuantity;
         this.imagePath = imagePath;
     }
-
-
 }

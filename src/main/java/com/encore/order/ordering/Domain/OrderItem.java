@@ -1,7 +1,5 @@
-package com.encore.order.orderitem.Domain;
+package com.encore.order.ordering.Domain;
 
-import com.encore.order.item.Domain.Item;
-import com.encore.order.ordering.Domain.Ordering;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
