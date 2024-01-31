@@ -49,10 +49,10 @@ public class OrderingService {
             int quantity = reqDto.getCounts().get(i);
 
             Item item = itemRepository.findById(itemId)
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid item ID"));
+                    .orElseThrow(() -> new IllegalArgumentException("없는 아이디"));
 
             if (item.getStockQuantity() < quantity) {
-                throw new IllegalArgumentException("Insufficient stock for item ID: " + itemId);
+                throw new IllegalArgumentException("수량이 너무 적습니다 " + itemId);
             }
 
             item.setstock(item.getStockQuantity() - quantity);
@@ -69,10 +69,10 @@ public class OrderingService {
     @Transactional
     public void cancelOrder(Long id) {
         Ordering ordering = orderingRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid order ID"));
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 아이디"));
 
         if (ordering.getOrderStatus() == OrderStatus.CANCELED) {
-            throw new IllegalStateException("Order is already canceled");
+            throw new IllegalStateException("이미 취소 처리 됐습니다");
         }
 
 

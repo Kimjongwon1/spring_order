@@ -32,7 +32,7 @@ public class OrderingController {
         return orderingService.findAllOrders().stream()
                 .map(ordering -> new OrderingListResDto(
                         ordering.getId(),
-                        ordering.getMember().getName(), // 여기서는 Member의 이름만 가져옵니다.
+                        ordering.getMember().getName(),
                         ordering.getOrderStatus(),
                         ordering.getCreatedTime()))
                 .collect(Collectors.toList());
